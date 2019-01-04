@@ -11,7 +11,9 @@ jobs:
         brew tap r-hub/cran
         brew tap-pin r-hub/cran
         brew install autobrew
-      displayName: Installing Autobrew
+        brew cask install r-app
+        R -e "sessionInfo()"
+      displayName: Installing R and Autobrew
 
 - job: Linux
   pool:
