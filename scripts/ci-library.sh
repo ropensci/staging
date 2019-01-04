@@ -1,6 +1,5 @@
 #!/bin/bash
 # Adapted from msys2
-
 # Enable colors
 normal=$(tput sgr0)
 red=$(tput setaf 1)
@@ -13,9 +12,9 @@ _status() {
     local status="${package:+${package}: }${2}"
     local items=("${@:3}")
     case "${type}" in
-        failure) local -n nameref_color='red';   title='[MSYS2 CI] FAILURE:' ;;
-        success) local -n nameref_color='green'; title='[MSYS2 CI] SUCCESS:' ;;
-        message) local -n nameref_color='cyan';  title='[MSYS2 CI]'
+        failure) local nameref_color="${red}";   title='[MSYS2 CI] FAILURE:' ;;
+        success) local nameref_color="${green}"; title='[MSYS2 CI] SUCCESS:' ;;
+        message) local nameref_color="${cyan}";  title='[MSYS2 CI]'
     esac
     printf "\n${nameref_color}${title}${normal} ${status}\n\n"
     printf "${items:+\t%s\n}" "${items:+${items[@]}}"

@@ -1,5 +1,6 @@
-#!/bin/sh
-source 'scripts/ci-library.sh'
+#!/bin/bash
+export TERM="${TERM:-xterm}"
+source "${BASH_SOURCE%/*}/ci-library.sh"
 
 # Detect changed packages
 list_commits  || failure 'Could not detect added commits'
