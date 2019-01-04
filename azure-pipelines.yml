@@ -4,18 +4,18 @@ jobs:
     vmImage: xcode9-macos10.13
   steps:
     - template: templates/setup-osx.yml
-    - template: templates/changes.yml
+    - template: templates/build.yml
 
 - job: Linux
   pool:
     vmImage: ubuntu-16.04
   steps:
     - template: templates/setup-ubuntu.yml
-    - template: templates/changes.yml      
+    - template: templates/build.yml      
 
 - job: Windows
   pool:
     vmImage: vs2015-win2012r2     
   steps:
     - template: templates/setup-windows.yml
-    - template: templates/changes.yml     
+    - template: templates/build.yml     
