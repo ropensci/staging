@@ -5,12 +5,13 @@ jobs:
   steps:
     - bash: |
         sudo xcode-select --switch /Applications/Xcode_10.app/Contents/Developer
+        brew remove $(brew list)
         brew update
         brew upgrade
         brew tap r-hub/cran
         brew tap-pin r-hub/cran
         brew install autobrew
-      displayName: Run brew test
+      displayName: Installing Autobrew
 
 - job: Linux
   pool:
@@ -25,12 +26,16 @@ jobs:
         sudo add-apt-repository -y ppa:marutter/c2d4u.5
         sudo apt-get update
         sudo apt-get install -y r-base-dev
-      displayName: Run ppa tests
+        R -e "sessionInfo()"
+      displayName: Installing R from the PPA
 
 - job: Windows
   pool:
     vmImage: vs2015-win2012r2     
   steps:
-    - bash: |
-        curl -OL https://cran.r-project.org/bin/windows/base/R-3.5.2-win.exe
-      displayName: Run Windows tests
+    - powershell: |
+        Import-Module '.\scripts\appveyor-tool.ps1'
+        SetTimezone
+        InstallRtools
+        InstallR
+      displayName: Installing R and Rtools for Windows
