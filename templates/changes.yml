@@ -1,0 +1,3 @@
+steps:
+- bash: git log
+  displayName: Run git log
