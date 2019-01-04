@@ -1,0 +1,12 @@
+steps:
+- bash: |
+    sudo xcode-select --switch /Applications/Xcode_10.app/Contents/Developer
+    brew remove $(brew list)
+    brew update
+    brew upgrade
+    brew tap r-hub/cran
+    brew tap-pin r-hub/cran
+    brew install autobrew
+    brew cask install r-app gfortran
+    R -e "sessionInfo()"
+  displayName: Installing R and Autobrew

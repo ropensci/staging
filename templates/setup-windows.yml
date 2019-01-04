@@ -1,0 +1,7 @@
+steps:
+- powershell: |
+    Import-Module '.\scripts\appveyor-tool.ps1'
+    SetTimezone
+    InstallRtools
+    InstallR
+  displayName: Installing R and Rtools for Windows
