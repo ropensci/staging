@@ -62,7 +62,10 @@ Function InstallR {
   echo "R is now available on drive $RDrive"
 
   Progress "Setting PATH"
-  $env:PATH = $RDrive + '\R\bin\' + $arch + ';' + 'C:\MinGW\msys\1.0\bin;' + $env:PATH
+  $env:PATH = $RDrive + '\R\bin\' + $arch + ';' + $env:PATH
+
+  Progress "Make PATH persistent"
+  Write-Host "##vso[task.setvariable variable=PATH;]${RDrive}\R\bin\${arch};${env:PATH}";
 
   Progress "Testing R installation"
   Rscript -e "sessionInfo()"

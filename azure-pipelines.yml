@@ -18,4 +18,4 @@ jobs:
     vmImage: vs2015-win2012r2     
   steps:
     - template: templates/setup-windows.yml
-    - template: templates/build.yml     
+    - template: templates/build.yml
