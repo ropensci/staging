@@ -8,5 +8,6 @@ steps:
     brew tap-pin r-hub/cran
     brew install autobrew
     brew cask install r-app gfortran
+    sudo chown -R $(whoami) /usr/local/lib /usr/local/share/man
     R -e "sessionInfo()"
   displayName: Installing R and Autobrew

@@ -5,6 +5,7 @@ jobs:
   steps:
     - template: templates/setup-osx.yml
     - template: templates/build.yml
+    - script: autobrew --check src/*.tar.gz
 
 - job: Linux
   pool:
