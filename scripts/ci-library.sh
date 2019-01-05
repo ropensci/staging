@@ -22,17 +22,17 @@ _status() {
 
 # Convert lines to array
 _as_list() {
-    local -n nameref_list="${1}"
     local filter="${2}"
     local strip="${3}"
     local lines="${4}"
     local result=1
-    nameref_list=()
+    local nameref_list=()
     while IFS= read -r line; do
         test -z "${line}" && continue
         result=0
         [[ "${line}" = ${filter} ]] && nameref_list+=("${line/${strip}/}")
     done <<< "${lines}"
+    eval $1=\$nameref_list
     return "${result}"
 }
 
@@ -52,13 +52,7 @@ list_commits()  {
 
 # Changed packages
 list_packages() {
-    local _packages
-    _list_changes _packages 'packages/*' 'packages/%' --pretty=format: --name-only || return 1
-    for _package in "${_packages[@]}"; do
-        local find_case_sensitive="$(find -name "${_package}" -type d -print -quit)"
-        test -n "${find_case_sensitive}" && packages+=("${_package}")
-    done
-    return 0
+    _list_changes packages 'packages/*' 'packages/' --pretty=format: --name-only || return 1
 }
 
 # Status functions
