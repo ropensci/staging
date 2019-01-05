@@ -9,4 +9,15 @@ message 'Processing changes' "${commits[@]}"
 test -z "${packages}" && success 'No changes in package recipes'
 
 # Print updated packages
-message "New package(s): ${packages}"
+message "Building package(s): ${packages}"
+for package in "${packages[@]}"; do
+	orig_url=$(head -1 "packages/${package}")
+	orig_name=$(basename $orig_url)
+	mkdir -p "build-$package" && cd "build-$package"
+    curl -LSsk $orig_url -o $orig_name
+    mkdir -p upstream
+    tar xf $orig_name -C upstream --strip-components=1
+    R CMD build upstream --no-build-vignettes --no-manual
+    rm -Rf upstream $orig_name
+    cd -
+done
