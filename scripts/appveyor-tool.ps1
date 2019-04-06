@@ -49,7 +49,7 @@ Function InstallR {
   [CmdletBinding()]
   Param()
 
-  $version = "3.5.2"
+  $version = "3.5.3"
   $rurl = $CRAN + "/bin/windows/base/" + "R-" + $version + "-win.exe"
 
   Progress ("Downloading R from: " + $rurl)

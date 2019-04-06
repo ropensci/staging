@@ -3,8 +3,10 @@ install_with_deps <- function(pkg){
 	stopifnot(file.exists(pkg))
 	path <- normalizePath(dirname(pkg), winslash = "/")
 	name <- strsplit(basename(pkg), "_")[[1]][1]
+
 	# Install current version + depds from binary packages
-	try(install.packages(name, dependencies = TRUE))
+	type <- ifelse(grepl("mingw|darwin", R.Version()$platform), "binary", "source")
+	try(install.packages(name, dependencies = TRUE, type = type))
 
 	# Install dev version
 	tools::write_PACKAGES(path, type = 'source', verbose = TRUE)

@@ -18,8 +18,9 @@ for package in "${packages[@]}"; do
     curl -LSsk $orig_url -o $orig_name
     mkdir -p upstream
     tar xf $orig_name -C upstream --strip-components=1
-    R CMD build upstream --no-build-vignettes --no-manual
+    rm -f upstream/vignettes/*.Rnw
+    Rscript --vanilla ../scripts/install_deps.R "upstream"
+    R CMD build upstream --no-build-vignettes
     rm -Rf upstream $orig_name
-    #Rscript --vanilla ../scripts/install.R *.tar.gz
     cd -
 done
