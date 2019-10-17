@@ -1,0 +1,3 @@
+steps:
+- bash: ./scripts/ci-check.sh
+  displayName: Checking for new packages

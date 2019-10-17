@@ -1,0 +1,21 @@
+jobs:
+- job: macOS
+  pool:
+    vmImage: macOS-10.13
+  steps:
+    - template: templates/setup-osx.yml
+    - template: templates/check.yml
+
+- job: Linux
+  pool:
+    vmImage: 'Ubuntu-16.04'
+  container: cran/debian:latest
+  steps:
+    - template: templates/check.yml
+
+- job: Windows
+  pool:
+    vmImage: 'vs2017-win2016'
+  steps:
+    - template: templates/setup-windows.yml
+    - template: templates/check.yml
