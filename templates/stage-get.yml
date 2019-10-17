@@ -5,4 +5,4 @@ steps:
       echo "##vso[task.setvariable variable=PKG]$PKG"
       git submodule update --init --remote "${PKG}"
       rm -f "${PKG}/.git"
-    displayName: "Getting upstream sources for $PKG"
+    displayName: "Getting upstream package source"
