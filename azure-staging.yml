@@ -1,21 +1,28 @@
+variables:
+  CRAN: 'https://cloud.r-project.org'
+  R_LIBS_USER: '$(Agent.BuildDirectory)/R/library'
+
 jobs:
 - job: macOS
   pool:
     vmImage: macOS-10.13
   steps:
-    - template: templates/setup-osx.yml
-    - template: templates/check.yml
-
-- job: Linux
-  pool:
-    vmImage: 'Ubuntu-16.04'
-  container: cran/debian:latest
-  steps:
-    - template: templates/check.yml
+    - template: templates/r-setup-osx.yml
+    - template: templates/stage-all.yml
 
 - job: Windows
   pool:
     vmImage: 'vs2017-win2016'
   steps:
-    - template: templates/setup-windows.yml
-    - template: templates/check.yml
+    - template: templates/r-setup-windows.yml
+    - template: templates/stage-all.yml
+
+- job: Linux
+  pool:
+    vmImage: 'Ubuntu-16.04'
+  container: rstudio/r-base:3.6-xenial
+  variables:
+    TZ: UTC
+  steps:
+    - template: templates/r-setup-linux.yml
+    - template: templates/stage-all.yml
