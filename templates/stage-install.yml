@@ -2,5 +2,5 @@ steps:
   - bash: |
       R CMD INSTALL ${PKG}_*${BINEXT}
       R -e "library($PKG); sessionInfo()"
-      R -e "installed.packages('$R_LIBS_USER')"
+      R -e "installed.packages()"
     displayName: "Installing and loading binary package"

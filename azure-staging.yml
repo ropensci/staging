@@ -28,9 +28,8 @@ jobs:
 - job: Linux
   pool:
     vmImage: 'Ubuntu-16.04'
-  container: rstudio/r-base:3.6-xenial
+  container: cran/debian:latest
   steps:
-    - template: templates/r-setup-linux.yml
     - template: templates/stage-all.yml
   variables:
     TZ: UTC
