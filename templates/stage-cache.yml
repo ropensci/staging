@@ -3,5 +3,9 @@ steps:
     inputs:
       key: "$(Agent.JobName)"
       path: "$(R_LIBS_USER)"
-      displayName: 'Setting up package library cache'
+      displayName: 'Loading package library cache'
       continueOnError: true
+  - bash: |
+      echo "Content of R_LIBS_USER:"
+      ls -ltr $R_LIBS_USER
+    displayName: "Show cache contents"

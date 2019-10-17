@@ -35,5 +35,5 @@ jobs:
   variables:
     TZ: UTC
     BINEXT: pc-linux-gnu.tar.gz
-    R_LIBS_USER: '$(Agent.WorkFolder)/r-library'
+    R_LIBS_USER: '$(Agent.BuildDirectory)/r-library'
     CRAN: ${{parameters.CRAN}}
