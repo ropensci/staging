@@ -1,0 +1,5 @@
+steps:
+  - bash: |
+      R CMD INSTALL ${PKG}_*${BINEXT}
+      R -e "library($PKG)"
+    displayName: "Install and load binary package"

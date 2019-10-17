@@ -1,0 +1,5 @@
+steps:
+  - bash: |
+      Rscript -e "install.packages('remotes')"
+      Rscript -e "remotes::install_deps('${PKG}', dependencies = TRUE)"
+    displayName: 'Install package dependencies'

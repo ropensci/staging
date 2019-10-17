@@ -1,0 +1,8 @@
+steps:
+  - template: stage-library.yml
+  - template: stage-cache.yml
+  - template: stage-get.yml
+  - template: stage-dependencies.yml
+  - template: stage-build.yml
+  - template: stage-check.yml
+  - template: stage-install.yml

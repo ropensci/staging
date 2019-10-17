@@ -1,0 +1,8 @@
+steps:
+  - bash: |
+      PKG=$(git log --pretty=format: --name-only HEAD^..)
+      echo "New package: ${PKG}"
+      echo "##vso[task.setvariable variable=PKG]$PKG"
+      git submodule update --init --remote "${PKG}"
+      rm -f "${PKG}/.git"
+    displayName: "Get upstream package sources"

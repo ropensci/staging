@@ -9,6 +9,8 @@ jobs:
   steps:
     - template: templates/r-setup-osx.yml
     - template: templates/stage-all.yml
+  variables:
+    BINEXT: .tgz
 
 - job: Windows
   pool:
@@ -16,13 +18,16 @@ jobs:
   steps:
     - template: templates/r-setup-windows.yml
     - template: templates/stage-all.yml
+  variables:
+    BINEXT: .zip
 
 - job: Linux
   pool:
     vmImage: 'Ubuntu-16.04'
   container: rstudio/r-base:3.6-xenial
-  variables:
-    TZ: UTC
   steps:
     - template: templates/r-setup-linux.yml
     - template: templates/stage-all.yml
+  variables:
+    TZ: UTC
+    BINEXT: pc-linux-gnu.tar.gz
