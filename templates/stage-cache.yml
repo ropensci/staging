@@ -2,6 +2,6 @@ steps:
   - task: CacheBeta@0
     inputs:
       key: "$(Agent.JobName)"
-      path: $(R_LIBS_USER)
-      displayName: 'Cache Package Library'
+      path: "$(R_LIBS_USER)"
+      displayName: 'Setting up package library cache'
       continueOnError: true

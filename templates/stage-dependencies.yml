@@ -2,4 +2,4 @@ steps:
   - bash: |
       Rscript -e "install.packages('remotes')"
       Rscript -e "setwd('$PKG'); remotes::install_deps(dependencies = TRUE)"
-    displayName: 'Install package dependencies'
+    displayName: 'Install package dependencies for $PKG'

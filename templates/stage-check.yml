@@ -1,4 +1,4 @@
 steps:
   - bash: |
       R CMD check --install-args="--build" --no-manual --no-build-vignettes ${PKG}_*.tar.gz
-    displayName: "Run CMD check"
+    displayName: "Runing R CMD check ${PKG}"

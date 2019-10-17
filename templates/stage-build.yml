@@ -1,4 +1,4 @@
 steps:
   - bash: |
       R CMD build ${PKG} --no-build-vignettes
-    displayName: "Build source packages"
+    displayName: "Building source package"
