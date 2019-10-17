@@ -2,6 +2,7 @@
 parameters:
   CRAN: 'https://cloud.r-project.org'
 
+jobs:
 - job: Windows
   pool:
     vmImage: 'vs2017-win2016'
@@ -10,10 +11,9 @@ parameters:
     - template: templates/stage-all.yml
   variables:
     BINEXT: .zip
-    R_LIBS: c:\R\library
+    R_LIBS_USER: c:\R\library
     CRAN: ${{parameters.CRAN}}
 
-jobs:
 - job: macOS
   pool:
     vmImage: macOS-10.13
@@ -22,7 +22,7 @@ jobs:
     - template: templates/stage-all.yml
   variables:
     BINEXT: .tgz
-    R_LIBS: /R/library
+    R_LIBS_USER: /R/library
     CRAN: ${{parameters.CRAN}}
 
 - job: Linux
@@ -35,5 +35,5 @@ jobs:
   variables:
     TZ: UTC
     BINEXT: pc-linux-gnu.tar.gz
-    R_LIBS: /R/library
+    R_LIBS_USER: /R/library
     CRAN: ${{parameters.CRAN}}
