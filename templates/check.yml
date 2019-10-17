@@ -2,5 +2,5 @@ steps:
   - task: Bash@3
     inputs:
       targetType: 'filePath'
-      filePath: ./scripts/ci-check.sh
+      filePath: ci-check.sh
     displayName: Checking for new packages
