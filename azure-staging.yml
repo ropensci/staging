@@ -1,6 +1,7 @@
-variables:
-  CRAN: 'https://cloud.r-project.org'
+# Global variables don't seem to work
+parameters:
   R_LIBS_USER: '$(Agent.BuildDirectory)/R/library'
+  CRAN: 'https://cloud.r-project.org'
 
 jobs:
 - job: macOS
@@ -11,6 +12,8 @@ jobs:
     - template: templates/stage-all.yml
   variables:
     BINEXT: .tgz
+    CRAN: ${{parameters.CRAN}}
+    R_LIBS_USER: ${{parameters.R_LIBS_USER}}
 
 - job: Windows
   pool:
@@ -20,6 +23,8 @@ jobs:
     - template: templates/stage-all.yml
   variables:
     BINEXT: .zip
+    CRAN: ${{parameters.CRAN}}
+    R_LIBS_USER: ${{parameters.R_LIBS_USER}}
 
 - job: Linux
   pool:
@@ -31,3 +36,5 @@ jobs:
   variables:
     TZ: UTC
     BINEXT: pc-linux-gnu.tar.gz
+    CRAN: ${{parameters.CRAN}}
+    R_LIBS_USER: ${{parameters.R_LIBS_USER}}
