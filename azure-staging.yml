@@ -8,7 +8,7 @@ jobs:
   pool:
     vmImage: macOS-10.13
   steps:
-    - template: templates/r-setup-osx.yml
+    - template: templates/r-setup-macos.yml
     - template: templates/stage-all.yml
   variables:
     BINEXT: .tgz
