@@ -11,7 +11,7 @@ jobs:
     - template: templates/stage-all.yml
   variables:
     BINEXT: .zip
-    R_LIBS_USER: c:\R\library
+    R_LIBS_USER: '$(Agent.WorkFolder)\r-library'
     CRAN: ${{parameters.CRAN}}
 
 - job: macOS
@@ -22,7 +22,7 @@ jobs:
     - template: templates/stage-all.yml
   variables:
     BINEXT: .tgz
-    R_LIBS_USER: /R/library
+    R_LIBS_USER: '$(Agent.WorkFolder)/r-library'
     CRAN: ${{parameters.CRAN}}
 
 - job: Linux
@@ -35,5 +35,5 @@ jobs:
   variables:
     TZ: UTC
     BINEXT: pc-linux-gnu.tar.gz
-    R_LIBS_USER: /R/library
+    R_LIBS_USER: '$(Agent.WorkFolder)/r-library'
     CRAN: ${{parameters.CRAN}}
