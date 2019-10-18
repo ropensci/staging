@@ -1,8 +1,9 @@
 steps:
   - script: |
       brew cask install r gfortran xquartz
-    displayName: 'Installing R and Fortran'
+    displayName: 'Installing R, XQuarts, Fortran'
   - script: |
+      brew uninstall --ignore-dependencies $(brew list)
       curl -fsSOL https://raw.githubusercontent.com/Homebrew/install/master/uninstall
       sudo ruby uninstall --force
       rm uninstall
