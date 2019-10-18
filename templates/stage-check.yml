@@ -4,6 +4,6 @@ steps:
     displayName: "Runing R CMD check"
   - task: PublishPipelineArtifact@1
     inputs:
-      targetPath: ${PKG}.Rcheck/00install.out
+      targetPath: $(PKG).Rcheck/00install.out
       artifactName: 'install.log'
     condition: succeededOrFailed()
