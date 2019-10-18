@@ -5,5 +5,5 @@ steps:
   - task: PublishPipelineArtifact@1
     inputs:
       targetPath: $(PKG).Rcheck/00install.out
-      artifactName: 'install.log'
+      artifactName: $(Agent.JobName)-install.log
     condition: succeededOrFailed()
