@@ -1,8 +1,8 @@
 steps:
   - task: CacheBeta@0
     inputs:
-      key: "$(Agent.JobName)"
-      path: "$(R_LIBS_USER)"
+      key: $(Agent.JobName)
+      path: $(R_LIBS_USER)
       displayName: 'Loading package library cache'
       continueOnError: true
   - bash: |

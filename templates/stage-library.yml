@@ -1,5 +1,6 @@
 steps:
   - bash: |
-      echo 'options(repos = "$(CRAN)", Ncpus = 2, crayon.enabled = TRUE)' > ~/.Rprofile
+      echo 'options(repos = c(CRAN = "$(CRAN)"), Ncpus = 2, crayon.enabled = TRUE)' > ~/.Rprofile
+      echo 'setRepositories(ind = 1:4)' >> ~/.Rprofile
       mkdir -p $R_LIBS_USER
     displayName: "Setting up R package library"
