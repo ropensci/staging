@@ -11,5 +11,6 @@ steps:
   - task: DownloadPipelineArtifact@2
     displayName: 'Download source package from artifacts'
     inputs:
-      targetPath: '$(Pipeline.Workspace)'
+      targetPath: '.'
+      artifactName: $(PKG_VERSION).tar.gz
     condition: ne(variables['Agent.JobName'], 'Linux')
