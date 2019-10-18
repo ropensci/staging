@@ -2,13 +2,13 @@ steps:
   - bash: |
       R CMD check --install-args="--build" --no-manual --no-build-vignettes ${PKG_VERSION}.tar.gz
     displayName: "Runing R CMD check"
-  - task: PublishBuildArtifacts@1
+  - task: PublishPipelineArtifact@1
     inputs:
-      pathtoPublish: $(PKG).Rcheck/00install.out
+      targetPath: $(PKG).Rcheck/00install.out
       artifactName: $(Agent.JobName)-install.log
     condition: succeededOrFailed()
-  - task: PublishBuildArtifacts@1
+  - task: PublishPipelineArtifact@1
     inputs:
-      pathtoPublish: $(PKG_VERSION)$(BINEXT)
+      targetPath: $(PKG_VERSION)$(BINEXT)
       artifactName: $(PKG_VERSION)$(BINEXT)
     condition: succeededOrFailed()
