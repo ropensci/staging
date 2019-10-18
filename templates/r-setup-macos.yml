@@ -1,6 +1,7 @@
 steps:
   - script: |
       brew cask install r gfortran xquartz
+      sed -i.bak 's/-fopenmp//g' $(R RHOME)/etc/Makeconf
     displayName: 'Installing R, XQuarts, Fortran'
   - script: |
       brew uninstall --ignore-dependencies $(brew list)
