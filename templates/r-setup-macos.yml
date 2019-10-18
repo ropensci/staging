@@ -1,9 +1,7 @@
 steps:
   - script: |
-      curl -fLo /tmp/R.pkg "$(CRAN)/bin/macosx/R-latest.pkg"
-      sudo installer -pkg "/tmp/R.pkg" -target /
-      rm /tmp/R.pkg
-    displayName: 'Installing R'
+      brew cask install r gfortran
+    displayName: 'Installing R and Fortran'
   - script: |
       curl -fsSOL https://raw.githubusercontent.com/Homebrew/install/master/uninstall
       sudo ruby uninstall --force
