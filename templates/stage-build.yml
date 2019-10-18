@@ -1,5 +1,9 @@
 steps:
   - bash: |
-      rm -f "${PKG}/.git"
-      R CMD build ${PKG} --no-build-vignettes --no-manual
+      R CMD build ${PKG} ${CHECK_ARGS}
     displayName: "Building source package"
+  - task: PublishPipelineArtifact@1
+    inputs:
+      targetPath: $(PKG_VERSION).tar.gz
+      artifactName: $(PKG_VERSION).tar.gz
+    condition: and(succeeded(), eq(variables['Agent.JobName'], 'Linux'))

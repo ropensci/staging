@@ -1,6 +1,6 @@
 steps:
   - bash: |
-      R CMD check --install-args="--build" --no-manual --no-build-vignettes ${PKG_VERSION}.tar.gz
+      R CMD check --install-args="--build" ${CHECK_ARGS} ${PKG_VERSION}.tar.gz
     displayName: "Runing R CMD check"
   - task: PublishPipelineArtifact@1
     inputs:

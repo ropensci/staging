@@ -12,6 +12,7 @@ jobs:
   variables:
     BINEXT: .zip
     R_LIBS_USER: '$(Agent.WorkFolder)\r-library'
+    CHECK_ARGS: '--no-manual --no-build-vignettes'
     CRAN: ${{parameters.CRAN}}
 
 - job: macOS
@@ -23,6 +24,7 @@ jobs:
   variables:
     BINEXT: .tgz
     R_LIBS_USER: '$(Agent.WorkFolder)/r-library'
+    CHECK_ARGS: '--no-manual --no-build-vignettes'
     CRAN: ${{parameters.CRAN}}
 
 - job: Linux
