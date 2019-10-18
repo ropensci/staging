@@ -33,6 +33,6 @@ jobs:
     - template: templates/stage-all.yml
   variables:
     TZ: UTC
-    BINEXT: pc-linux-gnu.tar.gz
+    BINEXT: _R_x86_64-pc-linux-gnu.tar.gz
     R_LIBS_USER: '$(Agent.BuildDirectory)/r-library'
     CRAN: ${{parameters.CRAN}}
