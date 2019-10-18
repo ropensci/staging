@@ -1,6 +1,6 @@
 steps:
   - script: |
-      brew cask install r gfortran
+      brew cask install r gfortran xquartz
     displayName: 'Installing R and Fortran'
   - script: |
       curl -fsSOL https://raw.githubusercontent.com/Homebrew/install/master/uninstall
