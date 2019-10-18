@@ -1,5 +1,5 @@
 steps:
   - bash: |
       rm -f "${PKG}/.git"
-      R CMD build ${PKG} --no-build-vignettes
+      R CMD build ${PKG} --no-build-vignettes --no-manual
     displayName: "Building source package"
