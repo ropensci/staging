@@ -2,8 +2,14 @@ steps:
   - bash: |
       R CMD build ${PKG} ${CHECK_ARGS}
     displayName: "Building source package"
+    condition: eq(variables['Agent.JobName'], 'Linux')
   - task: PublishPipelineArtifact@1
     inputs:
       targetPath: $(PKG_VERSION).tar.gz
       artifactName: $(PKG_VERSION).tar.gz
     condition: and(succeeded(), eq(variables['Agent.JobName'], 'Linux'))
+  - task: DownloadPipelineArtifact@2
+    displayName: 'Download source package from artifacts'
+    inputs:
+      targetPath: '$(Pipeline.Workspace)'
+    condition: ne(variables['Agent.JobName'], 'Linux')

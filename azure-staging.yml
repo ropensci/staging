@@ -3,7 +3,20 @@ parameters:
   CRAN: 'https://cloud.r-project.org'
 
 jobs:
+- job: Linux
+  pool:
+    vmImage: 'Ubuntu-16.04'
+  container: cran/debian:latest
+  steps:
+    - template: templates/stage-all.yml
+  variables:
+    TZ: UTC
+    BINEXT: _R_x86_64-pc-linux-gnu.tar.gz
+    R_LIBS_USER: '$(Agent.BuildDirectory)/r-library'
+    CRAN: ${{parameters.CRAN}}
+
 - job: Windows
+  dependsOn: Linux
   pool:
     vmImage: 'vs2017-win2016'
   steps:
@@ -16,6 +29,7 @@ jobs:
     CRAN: ${{parameters.CRAN}}
 
 - job: macOS
+  dependsOn: Linux
   pool:
     vmImage: macOS-10.13
   steps:
@@ -25,16 +39,4 @@ jobs:
     BINEXT: .tgz
     R_LIBS_USER: '$(Agent.WorkFolder)/r-library'
     CHECK_ARGS: '--no-manual --no-build-vignettes'
-    CRAN: ${{parameters.CRAN}}
-
-- job: Linux
-  pool:
-    vmImage: 'Ubuntu-16.04'
-  container: cran/debian:latest
-  steps:
-    - template: templates/stage-all.yml
-  variables:
-    TZ: UTC
-    BINEXT: _R_x86_64-pc-linux-gnu.tar.gz
-    R_LIBS_USER: '$(Agent.BuildDirectory)/r-library'
     CRAN: ${{parameters.CRAN}}
