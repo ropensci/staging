@@ -1,7 +1,8 @@
+# Note: cache is unmutable, so we need separate cache for each pkg
 steps:
   - task: CacheBeta@0
     inputs:
-      key: pkglib | $(Agent.OS)
+      key: ./$(PKG)/DESCRIPTION | $(Agent.OS)
       path: $(R_LIBS_USER)
       displayName: 'Loading package library cache'
       continueOnError: true
