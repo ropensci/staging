@@ -1,7 +1,7 @@
 steps:
   - task: CacheBeta@0
     inputs:
-      key: $(Agent.JobName)
+      key: pkglib | $(Agent.OS)
       path: $(R_LIBS_USER)
       displayName: 'Loading package library cache'
       continueOnError: true
