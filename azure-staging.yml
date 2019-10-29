@@ -17,6 +17,7 @@ jobs:
 
 - job: Windows
   dependsOn: Linux
+  condition: succeededOrFailed()
   pool:
     vmImage: 'vs2017-win2016'
   steps:
@@ -30,6 +31,7 @@ jobs:
 
 - job: macOS
   dependsOn: Linux
+  condition: succeededOrFailed()
   pool:
     vmImage: macOS-10.13
   steps:
