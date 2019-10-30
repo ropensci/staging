@@ -13,6 +13,7 @@ jobs:
     TZ: UTC
     BINEXT: _R_x86_64-pc-linux-gnu.tar.gz
     R_LIBS_USER: '$(Agent.BuildDirectory)/r-library'
+    CHECK_ARGS: '--no-manual'
     CRAN: ${{parameters.CRAN}}
 
 - job: Windows
