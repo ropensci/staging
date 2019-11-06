@@ -15,7 +15,7 @@ steps:
       remotePath: packages/$(PKG)/$(VERSION)/$(DEPLOYTYPE)/$(MD5SUM)
       authType: UserAndPass
       username: ropensci
-      password: $(password)
+      password: $(cranlikepwd)
     env:
-      password: $(CRANLIKEPWD)
+      cranlikepwd: $(cranlikepwd)
     displayName: 'Uploading package to CRAN-like repository'
