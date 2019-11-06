@@ -17,7 +17,7 @@ steps:
       authType: UserAndPass
       username: ropensci
       password: $(cranlikepwd)
-      options: --silent --show-error --fail
+      options: --fail
     env:
       cranlikepwd: $(cranlikepwd)
     displayName: 'Uploading package to CRAN-like repository'
