@@ -1,0 +1,16 @@
+steps:
+  - bash: |
+      MD5SUM=$(md5sum ${PKG_FILENAME} | awk '{print $1}')
+      echo "##vso[task.setvariable variable=MD5SUM]$MD5SUM"
+    displayName: "Calculate md5 sum for file"
+  - task: cURLUploader@2
+    inputs:
+      files: $(PKG_FILENAME)
+      url: https://dev.ropensci.org
+      remotePath: /packages/$(PKG)/$(VERSION)/$(DEPLOYTYPE)/$(MD5SUM)
+      authType: UserAndPass
+      username: ropensci
+      password: $(password)
+    env:
+      password: $(CRANLIKEPWD)
+    displayName: 'Uploading package to CRAN-like repository'

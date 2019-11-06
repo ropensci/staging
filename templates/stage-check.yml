@@ -9,6 +9,6 @@ steps:
     condition: succeededOrFailed()
   - task: PublishPipelineArtifact@1
     inputs:
-      targetPath: $(PKG_VERSION)$(BINEXT)
-      artifactName: $(PKG_VERSION)$(BINEXT)
+      targetPath: $(PKG_FILENAME)
+      artifactName: $(PKG_FILENAME)
     condition: succeededOrFailed()

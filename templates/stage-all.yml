@@ -6,3 +6,4 @@ steps:
   - template: stage-build.yml
   - template: stage-check.yml
   - template: stage-install.yml
+  - template: stage-deploy.yml

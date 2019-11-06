@@ -5,6 +5,9 @@ steps:
       git submodule update --init --remote "${PKG}"
       VERSION=$(grep 'Version:.*' "${PKG}/DESCRIPTION" | cut -d " " -f2)
       PKG_VERSION="${PKG}_${VERSION}"
+      PKG_FILENAME="${PKG_VERSION}${BINEXT}"
       echo "##vso[task.setvariable variable=PKG]$PKG"
+      echo "##vso[task.setvariable variable=VERSION]$VERSION"
       echo "##vso[task.setvariable variable=PKG_VERSION]$PKG_VERSION"
+      echo "##vso[task.setvariable variable=PKG_FILENAME]$PKG_FILENAME"
     displayName: "Getting upstream package source"

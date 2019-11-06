@@ -11,6 +11,7 @@ jobs:
     - template: templates/stage-all.yml
   variables:
     TZ: UTC
+    DEPLOYTYPE: src
     BINEXT: _R_x86_64-pc-linux-gnu.tar.gz
     R_LIBS_USER: '$(Agent.BuildDirectory)/r-library'
     CHECK_ARGS: '--no-manual'
@@ -26,6 +27,7 @@ jobs:
     - template: templates/stage-all.yml
   variables:
     BINEXT: .zip
+    DEPLOYTYPE: win
     R_LIBS_USER: '$(Agent.WorkFolder)\r-library'
     CHECK_ARGS: '--no-manual --no-build-vignettes'
     CRAN: ${{parameters.CRAN}}
@@ -40,6 +42,7 @@ jobs:
     - template: templates/stage-all.yml
   variables:
     BINEXT: .tgz
+    DEPLOYTYPE: mac
     R_LIBS_USER: '$(Agent.WorkFolder)/r-library'
     CHECK_ARGS: '--no-manual --no-build-vignettes'
     CRAN: ${{parameters.CRAN}}
