@@ -1,13 +1,18 @@
 steps:
   - bash: |
-      MD5SUM=$(md5sum ${PKG_FILENAME} | awk '{print $1}')
+      case "$DEPLOYTYPE" in
+       src) DEPLOY=$PKG_SOURCE ;;
+       *) DEPLOY=$PKG_BINARY ;;
+      esac
+      MD5SUM=$(openssl dgst -md5 $DEPLOY | awk '{print $2}')
+      echo "##vso[task.setvariable variable=DEPLOY]$DEPLOY"      
       echo "##vso[task.setvariable variable=MD5SUM]$MD5SUM"
-    displayName: "Calculate md5 sum for file"
+    displayName: "Calculate md5 sum for artifact"
   - task: cURLUploader@2
     inputs:
-      files: $(PKG_FILENAME)
+      files: $(DEPLOY)
       url: https://dev.ropensci.org
-      remotePath: /packages/$(PKG)/$(VERSION)/$(DEPLOYTYPE)/$(MD5SUM)
+      remotePath: packages/$(PKG)/$(VERSION)/$(DEPLOYTYPE)/$(MD5SUM)
       authType: UserAndPass
       username: ropensci
       password: $(password)

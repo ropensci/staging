@@ -1,6 +1,6 @@
 steps:
   - bash: |
-      R CMD INSTALL "${PKG_FILENAME}"
+      R CMD INSTALL "${PKG_BINARY}"
       R -e "library($PKG); sessionInfo()"
       R -e "as.data.frame(installed.packages(.libPaths()[1]))['Version']"
     displayName: "Installing and loading binary package"

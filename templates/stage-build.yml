@@ -5,12 +5,12 @@ steps:
     condition: eq(variables['Agent.JobName'], 'Linux')
   - task: PublishPipelineArtifact@1
     inputs:
-      targetPath: $(PKG_VERSION).tar.gz
-      artifactName: $(PKG_VERSION).tar.gz
+      targetPath: $(PKG_SOURCE)
+      artifactName: $(PKG_SOURCE)
     condition: and(succeeded(), eq(variables['Agent.JobName'], 'Linux'))
   - task: DownloadPipelineArtifact@2
     displayName: 'Download source package from artifacts'
     inputs:
       targetPath: '.'
-      artifactName: $(PKG_VERSION).tar.gz
+      artifactName: $(PKG_SOURCE)
     condition: ne(variables['Agent.JobName'], 'Linux')
