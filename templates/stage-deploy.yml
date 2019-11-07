@@ -17,7 +17,7 @@ steps:
       authType: UserAndPass
       username: ropensci
       password: $(cranlikepwd)
-      options: '--fail -H "Build-Status: $(Agent.JobStatus)" -H "Build-Url: $(System.CollectionUri)_build/results?buildId=$(Build.BuildId)"'
+      options: '--fail -H "Builder-Status: $(Agent.JobStatus)" -H "Builder-Url: $(System.CollectionUri)_build/results?buildId=$(Build.BuildId)"'
     env:
       cranlikepwd: $(cranlikepwd)
     displayName: 'Uploading package to CRAN-like repository'

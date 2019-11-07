@@ -1,5 +1,4 @@
 steps:
-  - bash: env
   - bash: |
       echo 'options(repos = c(CRAN = "$(CRAN)"), Ncpus = 2, crayon.enabled = TRUE)' > ~/.Rprofile
       echo 'utils::setRepositories(ind = 1:4)' >> ~/.Rprofile
