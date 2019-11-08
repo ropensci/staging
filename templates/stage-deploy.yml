@@ -10,16 +10,18 @@ steps:
     displayName: "Calculate md5 sum for artifact"
     condition: succeededOrFailed()
   - bash: |
-      Rscript -e "remotes::install_github('jeroen/makeconf')"
-      SCRIPT="cat(paste(makeconf::dpkg_sysdeps('$PKG'), collapse = ', '))"
-      SYSDEPS=$(Rscript --vanilla -e "$SCRIPT")
-      if [ "$SYSDEPS" ]; then
-        SYSDEPHEADER="-H \"Builder-Sysdeps: $SYSDEPS\""
-        echo "Found sysreqs: $SYSDEPS"
+      if [ "$OSTYPE" == "linux-gnu" ]; then
+        Rscript -e "remotes::install_github('jeroen/makeconf')"
+        SCRIPT="cat(paste(makeconf::dpkg_sysdeps('$PKG'), collapse = ', '))"
+        SYSDEPS=$(Rscript --vanilla -e "$SCRIPT")
+        if [ "$SYSDEPS" ]; then
+          SYSDEPHEADER="-H \"Builder-Sysdeps: $SYSDEPS\""
+          echo "Found sysreqs: $SYSDEPS"
+        fi
       fi
       echo "##vso[task.setvariable variable=SYSDEPHEADER]$SYSDEPHEADER"
-    displayName: "Determining system dependencies"
-    condition: and(succeededOrFailed(), eq(variables['Agent.JobName'], 'Linux'))
+    displayName: "Determining System Dependencies"
+    condition: succeededOrFailed()
   - task: cURLUploader@2
     inputs:
       files: $(DEPLOY)
