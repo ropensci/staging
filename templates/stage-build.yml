@@ -1,5 +1,6 @@
 steps:
   - bash: |
+      rm -Rf ${PKG}/.git
       R CMD build ${PKG} ${CHECK_ARGS}
     displayName: "Building source package"
     condition: eq(variables['Agent.JobName'], 'Linux')
