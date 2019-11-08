@@ -5,10 +5,20 @@ steps:
        *) DEPLOY=$PKG_BINARY ;;
       esac
       MD5SUM=$(openssl dgst -md5 $DEPLOY | awk '{print $2}')
-      echo "##vso[task.setvariable variable=DEPLOY]$DEPLOY"      
+      echo "##vso[task.setvariable variable=DEPLOY]$DEPLOY"
       echo "##vso[task.setvariable variable=MD5SUM]$MD5SUM"
     displayName: "Calculate md5 sum for artifact"
     condition: succeededOrFailed()
+  - bash: |
+      Rscript -e "remotes::install_github('jeroen/makeconf')"
+      SCRIPT="cat(paste(makeconf::dpkg_sysdeps('$PKG'), collapse = ', '))"
+      SYSDEPS=$(Rscript --vanilla -e "$SCRIPT")
+      if [ "$SYSDEPS" ]; then
+        SYSDEPHEADER="-H \"Builder-Sysdeps: $SYSDEPS\""
+        echo "##vso[task.setvariable variable=SYSDEPHEADER]$SYSDEPHEADER"
+      fi
+    displayName: ""
+    condition: and(succeededOrFailed(), eq(variables['Agent.JobName'], 'Linux'))
   - task: cURLUploader@2
     inputs:
       files: $(DEPLOY)
@@ -17,7 +27,7 @@ steps:
       authType: UserAndPass
       username: ropensci
       password: $(cranlikepwd)
-      options: '--fail -H "Builder-Host: Azure" -H "Builder-Status: $(Agent.JobStatus)" -H "Builder-Url: $(System.CollectionUri)$(System.TeamProject)/_build/results?buildId=$(Build.BuildId)"'
+      options: '--fail $(SYSDEPHEADER) -H "Builder-Host: Azure" -H "Builder-Status: $(Agent.JobStatus)" -H "Builder-Url: $(System.CollectionUri)$(System.TeamProject)/_build/results?buildId=$(Build.BuildId)"'
     env:
       cranlikepwd: $(cranlikepwd)
     displayName: 'Uploading package to CRAN-like repository'
