@@ -17,7 +17,7 @@ steps:
       authType: UserAndPass
       username: ropensci
       password: $(cranlikepwd)
-      options: '--fail -H "Builder-Status: $(Agent.JobStatus)" -H "Builder-Url: $(System.CollectionUri)$(System.TeamProject)/_build/results?buildId=$(Build.BuildId)"'
+      options: '--fail -H "Builder-Host: Azure" -H "Builder-Status: $(Agent.JobStatus)" -H "Builder-Url: $(System.CollectionUri)$(System.TeamProject)/_build/results?buildId=$(Build.BuildId)"'
     env:
       cranlikepwd: $(cranlikepwd)
     displayName: 'Uploading package to CRAN-like repository'
