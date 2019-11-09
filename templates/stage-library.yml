@@ -3,6 +3,8 @@ steps:
       echo 'options(repos = c(CRAN = "$(CRAN)"), Ncpus = 2, crayon.enabled = TRUE)' > ~/.Rprofile
       echo 'utils::setRepositories(ind = 1:4)' >> ~/.Rprofile
       echo 'DISPLAY=""' >> ~/.Renviron
+      echo 'R_BROWSER="echo"' >> ~/.Renviron
+      echo 'R_PDFVIEWER="echo"' >> ~/.Renviron
       echo 'RGL_USE_NULL=TRUE' >> ~/.Renviron
       echo '_R_CHECK_FORCE_SUGGESTS_=FALSE' >> ~/.Renviron
       echo '_R_CHECK_CRAN_INCOMING_=FALSE' >> ~/.Renviron
