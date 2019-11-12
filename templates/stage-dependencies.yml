@@ -1,5 +1,5 @@
 steps:
   - bash: |
       Rscript -e "install.packages('remotes')"
-      Rscript -e "setwd('$PKG'); remotes::install_deps(dependencies = TRUE)"
+      Rscript -e "setwd('$PKG'); install.packages(remotes::local_package_deps(dependencies=TRUE))"
     displayName: 'Install package dependencies'
