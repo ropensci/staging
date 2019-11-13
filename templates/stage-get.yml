@@ -3,7 +3,8 @@ steps:
       PKG=$(git log --pretty=format: --name-only HEAD^.. | grep "^[^.]")
       echo "New package: ${PKG}"
       git submodule update --init --remote "${PKG}"
-      VERSION=$(grep 'Version:.*' "${PKG}/DESCRIPTION" | cut -d " " -f2)
+      VERSION=$(grep 'Version:.*' "${PKG}/DESCRIPTION" | sed 's/Version:[[:space:]]//')
+      VERSION=$(echo -n "${VERSION//[[:space:]]/}")
       PKG_VERSION="${PKG}_${VERSION}"
       PKG_SOURCE="${PKG_VERSION}.tar.gz"      
       PKG_BINARY="${PKG_VERSION}${BINEXT}"
