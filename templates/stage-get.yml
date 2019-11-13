@@ -2,7 +2,7 @@ steps:
   - bash: |
       PKG=$(git log --pretty=format: --name-only HEAD^.. | grep "^[^.]")
       echo "New package: ${PKG}"
-      git submodule update --init --remote "${PKG}"
+      git submodule update --init --remote --depth 1 "${PKG}"
       VERSION=$(grep '^Version:' "${PKG}/DESCRIPTION" | sed 's/^Version://')
       VERSION=$(echo -n "${VERSION//[[:space:]]/}")
       PKG_VERSION="${PKG}_${VERSION}"
