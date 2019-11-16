@@ -46,3 +46,4 @@ jobs:
     R_LIBS_USER: '$(Agent.WorkFolder)/r-library'
     CHECK_ARGS: '--no-manual --no-build-vignettes'
     CRAN: ${{parameters.CRAN}}
+    PKG_CONFIG_PATH: /opt/X11/lib/pkgconfig
