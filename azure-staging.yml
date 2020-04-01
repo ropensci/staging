@@ -5,7 +5,7 @@ parameters:
 jobs:
 - job: Linux
   pool:
-    vmImage: 'Ubuntu-16.04'
+    vmImage: 'ubuntu-latest'
   container: cran/debian:latest
   steps:
     - template: templates/stage-all.yml
@@ -21,7 +21,7 @@ jobs:
   dependsOn: Linux
   condition: succeededOrFailed()
   pool:
-    vmImage: 'vs2017-win2016'
+    vmImage: 'windows-latest'
   steps:
     - template: templates/r-setup-windows.yml
     - template: templates/stage-all.yml
@@ -36,7 +36,7 @@ jobs:
   dependsOn: Linux
   condition: succeededOrFailed()
   pool:
-    vmImage: macOS-10.13
+    vmImage: macOS-latest
   steps:
     - template: templates/r-setup-macos.yml
     - template: templates/stage-all.yml
