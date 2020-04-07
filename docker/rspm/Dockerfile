@@ -13,7 +13,7 @@ RUN \
     libproj-dev libopencv-dev libtesseract-dev tesseract-ocr-eng libmagick++-dev \
     libprotobuf-dev protobuf-compiler libgit2-dev libxml2-dev libudunits2-dev \
     libpoppler-cpp-dev libsodium-dev libjq-dev libicu-dev libavfilter-dev cargo \
-    libv8-dev libmysqlclient-dev unixodbc-dev libpq-dev
+    libv8-dev libmysqlclient-dev unixodbc-dev libpq-dev language-pack-en-base libgpgme-dev
 
 RUN RPROFILE=$(R RHOME)/etc/Rprofile.site && \
     echo 'options(repos = c(CRAN = "https://demo.rstudiopm.com/all/__linux__/bionic/latest"))' >> "$RPROFILE" && \

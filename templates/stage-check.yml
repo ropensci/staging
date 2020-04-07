@@ -2,6 +2,9 @@ steps:
   - bash: |
       R CMD check --install-args="--build" ${CHECK_ARGS} ${PKG_SOURCE}
     displayName: "Runing R CMD check"
+  - bash: cat ${PKG}.Rcheck/00install.out
+    displayName: "Print install log"
+    condition: failed()
   - task: PublishPipelineArtifact@1
     inputs:
       targetPath: $(PKG).Rcheck/00install.out
