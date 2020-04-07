@@ -6,7 +6,7 @@ jobs:
 - job: Linux
   pool:
     vmImage: 'ubuntu-latest'
-  container: cran/debian:latest
+  container: ropensci/essentials:latest
   steps:
     - template: templates/stage-all.yml
   variables:
