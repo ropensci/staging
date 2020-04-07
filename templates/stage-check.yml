@@ -4,11 +4,6 @@ steps:
     displayName: "Runing R CMD check"
   - bash: cat ${PKG}.Rcheck/00install.out
     displayName: "Print install log"
-    condition: failed()
-  - task: PublishPipelineArtifact@1
-    inputs:
-      targetPath: $(PKG).Rcheck/00install.out
-      artifactName: $(Agent.JobName)-$(PKG)-$(VERSION)-log
     condition: succeededOrFailed()
   - task: PublishPipelineArtifact@1
     inputs:
