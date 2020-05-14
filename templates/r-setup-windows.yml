@@ -7,5 +7,5 @@ steps:
        tzutil /s "GMT Standard Time"
     displayName: 'Installing R'
   - pwsh: |
-       Write-Host "##vso[task.setvariable variable=PATH]C:\Rtools\bin;${env:PATH};C:\Progra~1\R\R-3.6.3\bin"
+       Write-Host "##vso[task.setvariable variable=PATH]C:\Rtools\bin;${env:PATH};C:\Progra~1\R\R-4.0.0\bin"
     displayName: 'Setting PATH'
