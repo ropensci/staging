@@ -1,7 +1,7 @@
 steps:
   - pwsh: |
        choco install r.project --version 4.0.0 -y --no-progress
-       choco install rtools --version 4.0.0 -y --no-progress
+       choco install rtools --version 4.0.0 -y --no-progress --ignore-checksums
 
        # Set the timezone
        tzutil /s "GMT Standard Time"
