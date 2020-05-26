@@ -7,7 +7,7 @@ RUN \
     apt-get update && \
     apt-get -y dist-upgrade && \
     apt-get install -y software-properties-common && \
-    add-apt-repository -y ppa:marutter/rrutter3.5 && \
+    add-apt-repository -y ppa:marutter/rrutter4.0 && \
     apt-get update && \
     apt-get install -y git curl pandoc pandoc-citeproc r-base-dev libcurl4-gnutls-dev libssl-dev \
     libgdal-dev libgeos-dev libproj-dev libopencv-dev libtesseract-dev tesseract-ocr-eng libmagick++-dev \
