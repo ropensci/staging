@@ -1,7 +1,6 @@
 # Global variables don't seem to work
 parameters:
   CRAN: 'https://cloud.r-project.org'
-  RSPM: 'https://demo.rstudiopm.com/all/__linux__/bionic/latest'
 
 jobs:
 - job: Linux
@@ -16,7 +15,6 @@ jobs:
     BINEXT: _R_x86_64-pc-linux-gnu.tar.gz
     R_LIBS_USER: '$(Agent.BuildDirectory)/r-library'
     CHECK_ARGS: '--no-manual'
-    CRAN: ${{parameters.RSPM}}
 
 - job: Windows
   dependsOn: Linux
