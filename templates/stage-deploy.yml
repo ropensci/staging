@@ -14,14 +14,16 @@ steps:
         Rscript -e "remotes::install_github('jeroen/makeconf')"
         SCRIPT="cat(paste(makeconf::dpkg_sysdeps('$PKG'), collapse = ', '))"
         SYSDEPS=$(Rscript --vanilla -e "$SCRIPT")
-        BUILDDATE=$(date +"%s")
-        OS_DISTRO=$(lsb_release -sc)
+        BUILDDATEHEADER="-H \"Builder-Date: $(date +'%s')\""
+        DISTROHEADER="-H \"Builder-Distro: $(lsb_release -sc)\""
         if [ "$SYSDEPS" ]; then
           SYSDEPHEADER="-H \"Builder-Sysdeps: $SYSDEPS\""
           echo "Found sysreqs: $SYSDEPS"
         fi
       fi
+      echo "##vso[task.setvariable variable=BUILDDATEHEADER]$BUILDDATEHEADER"
       echo "##vso[task.setvariable variable=SYSDEPHEADER]$SYSDEPHEADER"
+      echo "##vso[task.setvariable variable=DISTROHEADER]$DISTROHEADER"
     displayName: "Determining System Dependencies"
     condition: succeededOrFailed()
   - task: cURLUploader@2
@@ -32,7 +34,7 @@ steps:
       authType: UserAndPass
       username: ropensci
       password: $(cranlikepwd)
-      options: '--fail $(SYSDEPHEADER) -H "Builder-Date: $(BUILDDATE)" -H "Builder-Distro: $(OS_DISTRO)" -H "Builder-Commit: $(Build.SourceVersion)" -H "Builder-Timestamp: $(COMMIT_TIMESTAMP)" -H "Builder-Host: Azure" -H "Builder-Status: $(Agent.JobStatus)" -H "Builder-Url: $(System.CollectionUri)$(System.TeamProject)/_build/results?buildId=$(Build.BuildId)"'
+      options: '--fail $(SYSDEPHEADER) $(BUILDDATEHEADER) $(DISTROHEADER) -H "Builder-Commit: $(Build.SourceVersion)" -H "Builder-Timestamp: $(COMMIT_TIMESTAMP)" -H "Builder-Host: Azure" -H "Builder-Status: $(Agent.JobStatus)" -H "Builder-Url: $(System.CollectionUri)$(System.TeamProject)/_build/results?buildId=$(Build.BuildId)"'
     env:
       cranlikepwd: $(cranlikepwd)
     displayName: 'Uploading package to CRAN-like repository'
