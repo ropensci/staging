@@ -1,11 +1,11 @@
 steps:
   - pwsh: |
-       choco install r.project --version 4.0.0 -y --no-progress
+       choco install r.project --version 4.0.2 -y --no-progress
        choco install rtools --version 4.0.0 -y --no-progress --ignore-checksums
 
        # Set the timezone
        tzutil /s "GMT Standard Time"
     displayName: 'Installing R'
   - pwsh: |
-       Write-Host "##vso[task.setvariable variable=PATH]C:\rtools40\usr\bin;${env:PATH};C:\Progra~1\R\R-4.0.0\bin"
+       Write-Host "##vso[task.setvariable variable=PATH]C:\rtools40\usr\bin;${env:PATH};C:\Progra~1\R\R-4.0.2\bin"
     displayName: 'Setting PATH'
