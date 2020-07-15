@@ -19,5 +19,5 @@ RUN \
     libzmq3-dev zlib1g-dev libglpk-dev librdf0-dev libglu1-mesa-dev
 
 RUN RPROFILE=$(R RHOME)/etc/Rprofile.site && \
-    echo 'options(repos = c(CRAN = "https://demo.rstudiopm.com/all/__linux__/focal/latest"))' >> "$RPROFILE" && \
+    echo 'options(repos = c(CRAN = "https://packagemanager.rstudio.com/all/__linux__/focal/latest"))' >> "$RPROFILE" && \
     echo 'options(HTTPUserAgent = sprintf("R/%s R (%s)", getRversion(), paste(getRversion(), R.version$platform, R.version$arch, R.version$os)))' >> "$RPROFILE"
